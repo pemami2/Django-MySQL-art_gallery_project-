@@ -1,0 +1,39 @@
+{% extends 'home/layout.html' %}
+
+{% block content %}
+
+<form  name ="search" action="" method="POST">{% csrf_token %}
+    <p>Order by:</p>
+    <select style="display: block" id="category" name="category" placeholder="category">
+        <option value="artwork">Artwork</option>
+        <option value="artistid">Artist</option>
+        <option value="dateofcreation">Created</option>
+        <option value="dateacquired">Acquired</option>
+        <option value="price">Price</option>
+        <option value="contactid">Contact</option>
+        <option value="locationid">Location</option>
+    </select>
+    
+    <select style="display: block;" id='sort' name='sort'>
+        <option value="ascending">ascending</option>
+        <option value="descending">descending</option>
+    </select>
+    <p>Search</p>
+    <input id= "title" type="text" name="title" placeholder="Title" />
+    <input type="submit" value="Submit" />
+
+
+</form>
+
+
+<h6 style="padding-top: 50px; padding-bottom: 20px;">{{title}}</h6>
+
+<ul id= "data" class="collection">
+    {% for artwork  in artworks %}
+        <li class="collection item"> {{artwork.artwork}} | {{artwork.artistid}} | {{artwork.dateofcreation}} | {{artwork.dateacquired}}  | {{artwork.price}}  | {{artwork.locationid}}</li>
+    {% endfor %}
+</ul>
+
+<a href="../"> Home</a>
+
+{% endblock %}
